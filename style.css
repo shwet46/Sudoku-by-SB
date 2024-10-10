@@ -71,7 +71,7 @@ body {
 }
 
 .tile {
-    background-color: #000066;
+    background-color: #070740;
     background-size: cover;
     background-position: center;
     cursor: pointer;
@@ -141,7 +141,7 @@ body {
 
 .planet-tile:hover {
     transform: scale(1.1);
-    /*box-shadow: 0 0 10px #FFD369;*/
+    /*-box-shadow: 0 0 10px #FFD369;*/
 }
 
 #clear {
