@@ -5,7 +5,6 @@
 }
 
 body {
-    /*background-color: #000033;*/
     background-image: url('images/bg.jpg');
     background-attachment: fixed;
     background-size: cover;
@@ -44,7 +43,6 @@ body {
 
 .nav-bar .button:hover {
     background-color: #FFD369;
-    /*border: 1px solid #FFD369;*/
 }
 
 .message {
@@ -58,11 +56,11 @@ body {
 }
 
 #board {
-    width: 400px;
-    height: 400px;
+    width: 450px;
+    height: 450px;
     display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(8, 1fr);
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-rows: repeat(9, 1fr);
     gap: 1px;
     margin: 20px auto;
     background-color: #FFFFFF;
@@ -116,11 +114,11 @@ body {
 }
 
 #keypad {
-    width: 400px;
+    width: 450px;
     height: 100px;
     padding-top: 20px;
     display: grid;
-    grid-template-columns: repeat(8, 1fr);
+    grid-template-columns: repeat(9, 1fr);
     gap: 10px;
     margin: 0 auto;
     justify-content: center;
@@ -131,8 +129,6 @@ body {
     width: 42px;
     height: 42px;
     background-color: transparent;
-   /* border: 1px solid #FFFFFF;*/
-    /*border-radius: 50%;*/
     background-size: cover;
     background-position: center;
     cursor: pointer;
@@ -141,7 +137,6 @@ body {
 
 .planet-tile:hover {
     transform: scale(1.1);
-    /*-box-shadow: 0 0 10px #FFD369;*/
 }
 
 #clear {
@@ -163,12 +158,12 @@ body {
 
 @media (max-width: 500px) {
     #board {
-        width: 320px;
-        height: 320px;
+        width: 360px;
+        height: 360px;
     }
     
     #keypad {
-        width: 320px;
+        width: 360px;
         height: 80px;
     }
     

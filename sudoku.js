@@ -1,7 +1,7 @@
 let errase = document.getElementById('clear');
 let solve = document.getElementById('solve');
 let newG = document.getElementById('new-game');
-let selected = false;
+let selected = null;
 
 window.onload = function() {
     create();
@@ -14,29 +14,29 @@ errase.addEventListener('click', remove);
 solve.addEventListener('click', autoSolver);
 
 function setTable() {
-    for (let row = 0; row < 8; row++) {
-        for (let col = 0; col < 8; col++) {
+    for (let row = 0; row < 9; row++) {
+        for (let col = 0; col < 9; col++) {
             let tile = document.createElement("div");
             tile.classList.add("tile");
             tile.id = row + ' ' + col;
             document.getElementById("board").append(tile);
             printValues(tile, row, col);
-            if (row == 0 && col == 0) {
+            if (row === 0 && col === 0) {
                 tile.classList.add("top-left-corner-tile");
             }
-            if (row == 0 && col == 7) {
+            if (row === 0 && col === 8) {
                 tile.classList.add("top-right-corner-tile");
             }
-            if (row == 7 && col == 0) {
+            if (row === 8 && col === 0) {
                 tile.classList.add("bottom-left-corner-tile");
             }
-            if (row == 7 && col == 7) {
+            if (row === 8 && col === 8) {
                 tile.classList.add("bottom-right-corner-tile");
             }
-            if (row == 1 || row == 3 || row == 5) {
+            if (row === 2 || row === 5) {
                 tile.classList.add("horizontal-line");
             }
-            if (col == 3) {
+            if (col === 2 || col === 5) {
                 tile.classList.add("vertical-line");
             }
             tile.addEventListener("click", selectTile);
@@ -63,80 +63,89 @@ function keyPad() {
 }
 
 function selectTile() {
-    if (selected !== false) {
+    if (selected !== null) {
         selected.classList.remove("tile-selected");
     }
     selected = this;
-    if (!selected.classList.contains("start-num")) {
-        selected.classList.add("tile-selected");
-    }
+    selected.classList.add("tile-selected");
 }
 
 function insertPlanet() {
-    let planetTile = this;
-    if (planetTile && selected !== false && !selected.classList.contains("start-num")) {
-        selected.style.backgroundImage = planetTile.style.backgroundImage;
-        let coords = selected.id.split(' ');
-        let row = coords[0];
-        let col = coords[1];
-        grid[row][col] = planetTile.id;
+    if (selected && !selected.classList.contains("start-num")) {
+        selected.style.backgroundImage = this.style.backgroundImage;
+        let coords = selected.id.split(" ");
+        let row = parseInt(coords[0]);
+        let col = parseInt(coords[1]);
+        grid[row][col] = this.id;
+        if (isFull()) {
+            checkWin();
+        }
     }
-    return win();
 }
 
 function remove() {
-    if (selected !== false && !selected.classList.contains("start-num")) {
+    if (selected && !selected.classList.contains("start-num")) {
         selected.style.backgroundImage = '';
-        let coords = selected.id.split(' ');
-        let row = coords[0];
-        let col = coords[1];
+        let coords = selected.id.split(" ");
+        let row = parseInt(coords[0]);
+        let col = parseInt(coords[1]);
         grid[row][col] = empty;
     }
 }
 
-function autoSolver() {
-    let tile = document.querySelectorAll('.tile');
-    for (let i = 0; i < tile.length; i++) {
-        let row = Math.floor(i / 8);
-        let col = i % 8;
-        tile[i].style.backgroundImage = `url('images/${finalGrid[row][col]}.png')`;
-        tile[i].classList.add("start-num");
+function checkWin() {
+    if (checkSolution()) {
+        document.getElementById("game-status").innerText = 'YOU WIN!';
+    } else {
+        document.getElementById("game-status").innerText = 'TRY AGAIN';
     }
-    document.getElementById("game-status").innerText = 'SOLVED';
-    if (selected) {
-        selected.classList.remove("tile-selected");
+}
+
+function autoSolver() {
+    // Reset the grid to its initial state
+    for (let row = 0; row < 9; row++) {
+        for (let col = 0; col < 9; col++) {
+            let tile = document.getElementById(row + " " + col);
+            if (!tile.classList.contains("start-num")) {
+                grid[row][col] = empty;
+                tile.style.backgroundImage = '';
+            }
+        }
+    }
+
+    // Solve the puzzle
+    if (solver()) {
+        // Update the visual representation
+        for (let row = 0; row < 9; row++) {
+            for (let col = 0; col < 9; col++) {
+                let tile = document.getElementById(row + " " + col);
+                if (grid[row][col] !== empty) {
+                    tile.style.backgroundImage = `url('images/${grid[row][col]}.png')`;
+                }
+            }
+        }
+        document.getElementById("game-status").innerText = 'SOLVED!';
+    } else {
+        document.getElementById("game-status").innerText = 'NO SOLUTION EXISTS!';
     }
 }
 
 function newGame() {
-    let tile = document.querySelectorAll('.tile');
+    let tiles = document.querySelectorAll('.tile');
     create();
-    for (let i = 0; i < tile.length; i++) {
-        let row = Math.floor(i / 8);
-        let col = i % 8;
-        tile[i].style.backgroundImage = '';
-        tile[i].classList.remove("start-num");
+    for (let i = 0; i < tiles.length; i++) {
+        let row = Math.floor(i / 9);
+        let col = i % 9;
+        tiles[i].style.backgroundImage = '';
+        tiles[i].classList.remove("start-num");
         if (grid[row][col] !== empty) {
-            tile[i].style.backgroundImage = `url('images/${grid[row][col]}.png')`;
-            tile[i].classList.add("start-num");
+            tiles[i].style.backgroundImage = `url('images/${grid[row][col]}.png')`;
+            tiles[i].classList.add("start-num");
         }
     }
     if (selected) {
         selected.classList.remove("tile-selected");
+        selected = null;
     }
     document.getElementById("game-status").innerText = 'GAME STARTED';
-}
-
-function win() {
-    if (!isFull() || !checkSolution()) {
-        return false;
-    }
-
-    let tile = document.querySelectorAll('.tile');
-    for (let i = 0; i < tile.length; i++) {
-        tile[i].classList.add("start-num");
-    }
-    selected.classList.remove("tile-selected");
-    document.getElementById("game-status").innerText = 'YOU WIN';
-    return true;
 }
