@@ -102,7 +102,6 @@ function checkWin() {
 }
 
 function autoSolver() {
-    // Reset the grid to its initial state
     for (let row = 0; row < 9; row++) {
         for (let col = 0; col < 9; col++) {
             let tile = document.getElementById(row + " " + col);
@@ -113,9 +112,7 @@ function autoSolver() {
         }
     }
 
-    // Solve the puzzle
     if (solver()) {
-        // Update the visual representation
         for (let row = 0; row < 9; row++) {
             for (let col = 0; col < 9; col++) {
                 let tile = document.getElementById(row + " " + col);
@@ -124,7 +121,7 @@ function autoSolver() {
                 }
             }
         }
-        document.getElementById("game-status").innerText = 'SOLVED!';
+        document.getElementById("game-status").innerText = 'Scroll down to find something :)';
     } else {
         document.getElementById("game-status").innerText = 'NO SOLUTION EXISTS!';
     }
@@ -147,5 +144,5 @@ function newGame() {
         selected.classList.remove("tile-selected");
         selected = null;
     }
-    document.getElementById("game-status").innerText = 'GAME STARTED';
+    document.getElementById("game-status").innerText = 'Anyone wondering where pluto is ? solve this to know by keeping an empty space for pluto :)';
 }

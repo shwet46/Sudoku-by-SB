@@ -56,7 +56,7 @@ function makeUnique() {
 function solver() {
     let emptySpot = findEmptySpot();
     if (!emptySpot) {
-        return true; // puzzle is solved
+        return true; 
     }
 
     let [row, col] = emptySpot;
