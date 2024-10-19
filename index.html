@@ -1,20 +1,30 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Planet Sudoku 9x9</title>
+    <title>Planet Sudoku</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <video autoplay muted loop id="video-background">
+        <source src="images/bg.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+
+    <main id="content">
+
     <div class="nav-bar">
-        <button id="new-game" class="button">NEW GAME</button>
+        <button class="button" id="new-game">NEW GAME</button>
         <h1>PLANET SUDOKU</h1>
-        <button id="solve" class="button">SOLVE</button>
+        <button class="button" id="solve">SOLVE</button>
     </div>
 
     <div class="message">
-        <h2 id="game-status">Anyone wondering where pluto is ? solve this to know by keeping an empty space for pluto :)</h2>
+        <h2 id="game-status">Anyone wondering where pluto is? solve this to know by keeping an empty space for pluto :)</h2>
     </div>
 
     <div class="container">
@@ -23,14 +33,15 @@
         <button id="clear">CLEAR</button>
     </div>
 
-    <!-- Orbit and Pluto -->
     <div class="orbit-container">
         <div class="pluto-container">
             <div class="pluto"></div>
-            <p class="pluto-text">anyone wondering where Pluto is, here it is!</p>
+            <p>anyone wondering where Pluto is, here it is!</p>
         </div>
         <div class="orbit"></div>
     </div>
+
+    </main>
 
     <script src="script.js"></script>
     <script src="sudoku.js"></script>

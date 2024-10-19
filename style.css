@@ -1,3 +1,4 @@
+/* style.css */
 * {
     margin: 0;
     padding: 0;
@@ -5,14 +6,29 @@
 }
 
 body {
-    background-image: url('images/bg.jpg');
+   /* background-image: url('images/bg.jpg');
     background-attachment: fixed;
-    background-size: cover;
+    background-size: cover;*/
     align-items: center;
     text-align: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #FFFFFF;
 }
+
+#video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+  
+  #content {
+    text-align: center;
+    z-index: 1;
+  }
 
 .nav-bar {
     max-height: 30px;
@@ -61,19 +77,6 @@ body {
     padding-top: 25px;
 }
 
-/*#board {
-    width: 450px;
-    height: 450px;
-    display: grid;
-    grid-template-columns: repeat(9, 1fr);
-    grid-template-rows: repeat(9, 1fr);
-    gap: 1px;
-    margin: 20px auto;
-    background-color: #FFFFFF;
-    padding: 2px;
-    border-radius: 8px;
-}*/
-
 #board {
     width: 450px;
     height: 450px;
@@ -82,7 +85,7 @@ body {
     grid-template-rows: repeat(9, 1fr);
     gap: 1px;
     margin: 20px auto;
-    background-color: rgba(0, 0, 15, 0.7);
+   /* background-color: rgba(0, 0, 15, 0.7);*/
     padding: 10px;
     border-radius: 10px;
 }
@@ -105,6 +108,7 @@ body {
     border: 2px solid #FFD369;
     box-shadow: 0 0 10px #FFD369;
 }
+
 .top-left-corner-tile {
     border-top-left-radius: 6px;
 }
@@ -131,11 +135,6 @@ body {
 
 .vertical-line {
     border-right: 2px solid #FFFFFF;
-}
-
-.tile-selected {
-    border: 2px solid #FFD369;
-    box-shadow: 0 0 10px #FFD369;
 }
 
 #keypad {
@@ -187,6 +186,14 @@ body {
     width: 100%;
     height: 200px;
     margin-top: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s ease-in-out;
+}
+
+.orbit-container.visible {
+    opacity: 1;
+    visibility: visible;
 }
 
 .orbit {
@@ -215,7 +222,7 @@ body {
 .pluto {
     width: 42px;
     height: 42px;
-    background-image: url('images/dwarf.png'); /* Replace with the correct path */
+    background-image: url('images/dwarf.png');
     background-size: cover;
     background-position: center;
     border-radius: 50%;

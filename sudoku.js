@@ -1,3 +1,4 @@
+// sudoku.js
 let errase = document.getElementById('clear');
 let solve = document.getElementById('solve');
 let newG = document.getElementById('new-game');
@@ -95,9 +96,11 @@ function remove() {
 
 function checkWin() {
     if (checkSolution()) {
-        document.getElementById("game-status").innerText = 'YOU WIN!';
+        document.getElementById("game-status").innerText = 'YOU WIN! Scroll down to see where Pluto is!';
+        document.querySelector('.orbit-container').classList.add('visible');
     } else {
         document.getElementById("game-status").innerText = 'TRY AGAIN';
+        document.querySelector('.orbit-container').classList.remove('visible');
     }
 }
 
@@ -121,9 +124,11 @@ function autoSolver() {
                 }
             }
         }
-        document.getElementById("game-status").innerText = 'Scroll down to find something :)';
+        document.getElementById("game-status").innerText = 'Solved! Scroll down to see where Pluto is!';
+        document.querySelector('.orbit-container').classList.add('visible');
     } else {
         document.getElementById("game-status").innerText = 'NO SOLUTION EXISTS!';
+        document.querySelector('.orbit-container').classList.remove('visible');
     }
 }
 
@@ -144,5 +149,6 @@ function newGame() {
         selected.classList.remove("tile-selected");
         selected = null;
     }
-    document.getElementById("game-status").innerText = 'Anyone wondering where pluto is ? solve this to know by keeping an empty space for pluto :)';
+    document.getElementById("game-status").innerText = 'Anyone wondering where pluto is? solve this to know by keeping an empty space for pluto :)';
+    document.querySelector('.orbit-container').classList.remove('visible');
 }

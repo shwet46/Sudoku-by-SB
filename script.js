@@ -1,3 +1,4 @@
+// script.js
 const planets = ['mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune', 'pluto'];
 let grid = [];
 let finalGrid = [];
@@ -56,7 +57,7 @@ function makeUnique() {
 function solver() {
     let emptySpot = findEmptySpot();
     if (!emptySpot) {
-        return true; 
+        return true;
     }
 
     let [row, col] = emptySpot;
@@ -69,11 +70,11 @@ function solver() {
                 return true;
             }
 
-            grid[row][col] = empty; // backtrack
+            grid[row][col] = empty;
         }
     }
 
-    return false; // no solution exists
+    return false;
 }
 
 function findEmptySpot() {
@@ -84,7 +85,7 @@ function findEmptySpot() {
             }
         }
     }
-    return null; // no empty spots
+    return null;
 }
 
 function setGame() {
