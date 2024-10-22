@@ -28,6 +28,7 @@ body {
   }
   
   #content {
+    margin-top: 10px;
     text-align: center;
     z-index: 1;
   }
